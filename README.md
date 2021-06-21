@@ -2,7 +2,7 @@ This is a test web service for todo list
 ---
 You can create todos, reed, update, delete them within an API.
 
-Main libraries
+Project uses
 ---
 - Python 3.9.1 (you should use python > 3.9)
 - Flask as a core module
