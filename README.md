@@ -69,7 +69,7 @@ with sudo permissions):
 
 > sudo apt install git
 
-> git clone 
+> git clone https://github.com/Rebbit13/TodoGARPEX.git
 
 > cd TodoGARPEX
  
