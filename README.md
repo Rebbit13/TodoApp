@@ -17,8 +17,8 @@ Modules
   * "api/task/{task_id}" - the path to GET concrete task, to PUT updates to
     an existing task and to DELETE it.
     
-- models - contain classes to verify and send to a db.
-  * Task - a concrete todo with attr:
+- models - contains classes to verify and send to a db.
+  * Task - a concrete todo with attrs:
     * id - primary key
     * title - title of the task, cannot be more than 150 chars
     * content - description of the task
@@ -63,7 +63,7 @@ You should use python > 3.9
    * for linux:
      > python3 main.py
 
-NOTE: if you deploy app to a remote server you can follow this way (for linux while in root dir
+NOTE: if you need to deploy app to a remote server you can follow this way (for linux while in root dir
 with sudo permissions):
 > sudo apt-get install python3-pip
 
