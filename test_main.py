@@ -2,8 +2,8 @@ import time
 import unittest
 from unittest import TestCase
 
-import config
-from models import db, Task
+import settings
+from Models import db, Task
 import main
 
 
@@ -133,7 +133,7 @@ class TaskTestCase(TestCase):
         self.assertEqual(len(r.json["tasks"]), 1)
 
     def test_all(self):
-        if config.TESTING is False:
+        if settings.TESTING is False:
             print('YOU SHOULD SET config.TESTING = True TO USE TEMP DATABASE')
             raise AssertionError
         self._set_up()
