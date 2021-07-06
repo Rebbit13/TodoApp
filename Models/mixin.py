@@ -2,15 +2,10 @@
 
 from datetime import datetime
 
-from peewee import Model, SqliteDatabase
+from peewee import Model
 from peewee import DateTimeField, AutoField
 
-import settings
-
-db = SqliteDatabase(settings.DATABASE_NAME)
-if settings.TESTING is True:
-    db = SqliteDatabase(":memory:")
-    db.connect()
+from Models.database import db
 
 
 class BaseMixin(Model):
@@ -25,3 +20,6 @@ class BaseMixin(Model):
 class CreatedAtMixin(Model):
     """Set created_at auto field"""
     created_at = DateTimeField(default=datetime.now())
+
+    class Meta:
+        abstract = True

@@ -1,9 +1,9 @@
-import time
 import unittest
 from unittest import TestCase
 
 import settings
-from Models import db, Task
+from Models.task import Task
+from Models.migrations import db
 import main
 
 

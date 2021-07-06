@@ -1,5 +1,5 @@
 # ignore python sistem files
-__pycache__/
+*__pycache__/
 
 # ignore env and pycharm dirs
 /.idea
@@ -10,3 +10,9 @@ Include/site/
 # ignore some random files
 /fd.py
 /pyvenv.cfg
+
+# ignore db
+*.db
+
+# ignore logs
+/*.log

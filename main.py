@@ -11,7 +11,8 @@ from peewee import DoesNotExist, IntegrityError
 from werkzeug.exceptions import NotFound, BadRequest
 
 import settings
-from models import Task
+from Models.migrations import migrate_database
+from Models.task import Task
 
 
 app = Flask(__name__)
@@ -145,4 +146,5 @@ class TaskModel(Resource):
 
 
 if __name__ == '__main__':
+    migrate_database()
     app.run(debug=settings.DEBUG)
