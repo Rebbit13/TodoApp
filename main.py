@@ -10,8 +10,9 @@ from flask_restx import fields, Resource, Api, reqparse
 from peewee import DoesNotExist, IntegrityError
 from werkzeug.exceptions import NotFound, BadRequest
 
-import config
-from models import Task
+import settings
+from Models.migrations import migrate_database
+from Models.task import Task
 
 
 app = Flask(__name__)
@@ -21,11 +22,11 @@ api = Api(app, validate=True)
 # logging. If config.DEBUG == True print debug information
 # in console. Else use logfile path
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-if config.DEBUG is True:
+if settings.DEBUG is True:
     logging.basicConfig(level='DEBUG', format=LOG_FORMAT)
 else:
     logging.basicConfig(level='INFO',
-                        filename=config.LOG_FILE,
+                        filename=settings.LOG_FILE,
                         format=LOG_FORMAT)
 logger = logging.getLogger()
 
@@ -145,4 +146,5 @@ class TaskModel(Resource):
 
 
 if __name__ == '__main__':
-    app.run(debug=config.DEBUG)
+    migrate_database()
+    app.run(debug=settings.DEBUG)
