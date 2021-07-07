@@ -5,7 +5,7 @@ from datetime import datetime
 from peewee import Model
 from peewee import DateTimeField, AutoField
 
-from Models.database import db
+from todo.Models.database import db
 
 
 class BaseMixin(Model):

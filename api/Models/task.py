@@ -1,6 +1,6 @@
 from peewee import TextField, CharField
 
-from Models.mixin import BaseMixin, CreatedAtMixin
+from todo.Models.mixin import BaseMixin, CreatedAtMixin
 
 
 class Task(BaseMixin, CreatedAtMixin):

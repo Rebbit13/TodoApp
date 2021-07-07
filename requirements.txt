@@ -9,7 +9,9 @@ Jinja2==2.11.3
 jsonschema==3.2.0
 MarkupSafe==2.0.1
 peewee==3.14.4
+pydantic==1.8.2
 pyrsistent==0.17.3
 pytz==2021.1
 six==1.16.0
+typing-extensions==3.10.0.0
 Werkzeug==1.0.1

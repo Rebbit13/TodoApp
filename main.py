@@ -2,21 +2,6 @@
 Main module of the project.
 Process http requests.
 """
-import json
-import logging
-
-from flask import Flask
-from flask_restx import fields, Resource, Api, reqparse
-from peewee import DoesNotExist, IntegrityError
-from werkzeug.exceptions import NotFound, BadRequest
-
-import settings
-from Models.migrations import migrate_database
-from Models.task import Task
-
-
-app = Flask(__name__)
-api = Api(app, validate=True)
 
 
 # logging. If config.DEBUG == True print debug information

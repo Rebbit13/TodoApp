@@ -2,16 +2,16 @@ import unittest
 from unittest import TestCase
 
 import settings
-from Models.task import Task
-from Models.migrations import db
-import main
+from evgeny_todo.api.Models.task import Task
+from evgeny_todo.todo.Models.migrations import db
+import app
 
 
 class TaskTestCase(TestCase):
 
     def _set_up(self):
         self.db_fd = db
-        self.app = main.app.test_client()
+        self.app = app.app.test_client()
         self.db_fd.create_tables([Task])
 
     def _tear_down(self):
