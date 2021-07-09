@@ -2,8 +2,8 @@ import unittest
 from unittest import TestCase
 
 import settings
-from evgeny_todo.api.Models.task import Task
-from evgeny_todo.todo.Models.migrations import db
+from evgeny_todo.models.task import Task
+from evgeny_todo.migrations.migrations import db
 import app
 
 

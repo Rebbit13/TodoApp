@@ -1,6 +1,6 @@
 import settings
-from todo.Models.database import db
-from api.Models.task import Task
+from models.database import db
+from models.task import Task
 
 REGISTERED_MODELS = [Task]
 

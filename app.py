@@ -1,15 +1,12 @@
 import logging
 
 from flask import Flask
-from flask_restx import fields, Resource, Api, reqparse
-from peewee import DoesNotExist, IntegrityError
-from werkzeug.exceptions import NotFound, BadRequest
+from flask_restx import Api
 
 import settings
-from evgeny_todo.api.View.task_view import TaskList
 from evgeny_todo.api.urls import task_namespace
-from evgeny_todo.todo.Models.migrations import migrate_database
-from evgeny_todo.api.Models.task import Task
+from evgeny_todo.migrations.migrations import migrate_database
+
 
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
 if settings.DEBUG is True:
@@ -22,7 +19,6 @@ logger = logging.getLogger()
 
 app = Flask(__name__)
 api = Api(app,  prefix='/api', validate=False)
-
 api.add_namespace(task_namespace)
 
 
