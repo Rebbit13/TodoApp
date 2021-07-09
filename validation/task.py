@@ -1,7 +1,7 @@
 from marshmallow import validate, fields
 from marshmallow_peewee import ModelSchema
 
-from evgeny_todo.models.task import Task
+from models.task import Task
 
 
 class TaskSchema(ModelSchema):

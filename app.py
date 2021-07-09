@@ -4,8 +4,8 @@ from flask import Flask
 from flask_restx import Api
 
 import settings
-from evgeny_todo.api.urls import task_namespace
-from evgeny_todo.migrations.migrations import migrate_database
+from api.urls import task_namespace
+from migrations.migrations import migrate_database
 
 
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"

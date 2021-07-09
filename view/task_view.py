@@ -1,8 +1,10 @@
+import json
+
 from flask import make_response, request
 from flask_restx import Resource, Namespace, reqparse
 
-from evgeny_todo.models.task import Task
-from evgeny_todo.validation.task import TaskSchema
+from models.task import Task
+from validation.task import TaskSchema
 
 task_namespace = Namespace('task', description='Task operations')
 
@@ -15,11 +17,12 @@ class TaskList(Resource):
 
     @staticmethod
     def get():
-        return [{"id": t.id,
-                 "title": t.title,
-                 "content": t.content,
-                 "created_at": t.created_at}
-                for t in Task.select()]
+        tasks = [{"id": t.id,
+                  "title": t.title,
+                  "content": t.content,
+                  "created_at": str(t.created_at)}
+                 for t in Task.select()]
+        return {"tasks": tasks}
 
     @staticmethod
     @task_namespace.expect(task_parser, validate=False)
@@ -43,7 +46,7 @@ class TaskSingle(Resource):
                 if model:
                     return func(model, *args, **kwargs)
                 else:
-                    return make_response(f'There is no task with id {task_id}', "404")
+                    return make_response({"message": f'There is no task with id {task_id}'}, "404")
             return wrapper
 
     @staticmethod
@@ -67,4 +70,4 @@ class TaskSingle(Resource):
     @Decorator.check_if_task_exists
     def delete(model):
         model.delete_instance()
-        return make_response(f"Deleted task with id {model.id}", "200")
+        return make_response({"message": f"Deleted task with id {model.id}"}, "200")

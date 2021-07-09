@@ -1,6 +1,6 @@
 from flask_restx import Namespace
 
-from evgeny_todo.view.task_view import TaskList, TaskSingle, task_namespace
+from view.task_view import TaskList, TaskSingle, task_namespace
 
 # add api models to list in format {"root": root, "model": model(Resource)}
 REGISTERED_ROOTS = [
