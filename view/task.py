@@ -53,4 +53,5 @@ class TaskSingle(Resource):
     @validate_if_model_exists(key_name="task_id", database_model=Task)
     def delete(model, *args, **kwargs):
         model.delete_instance()
-        return make_response({"message": f"Deleted task with id {model.id}"}, "200")
+        return make_response({"message": f"Deleted task with id {model.id}"},
+                             "200")

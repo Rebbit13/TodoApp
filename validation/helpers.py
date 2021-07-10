@@ -15,7 +15,10 @@ def validate_if_model_exists(key_name: str, database_model):
             if model:
                 return func(model, *args, **kwargs)
             else:
-                return make_response({"message": f'There is no model with id {kwargs[key_name]}'}, "404")
+                return make_response(
+                    {"message": f'There is no model '
+                                f'with id {kwargs[key_name]}'},
+                    "404")
         return wrapper
     return decorator
 

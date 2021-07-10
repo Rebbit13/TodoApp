@@ -81,7 +81,7 @@ The app will run in no screen mode
 
 Testing
 ---
-Just run command bellow from evgeny_todo dir
+set settings.TESTING = True and run command bellow from evgeny_todo dir
 > python3 -m unittest tests/test_task.py
 
 
