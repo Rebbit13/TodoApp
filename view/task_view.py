@@ -1,10 +1,12 @@
-import json
-
 from flask import make_response, request
 from flask_restx import Resource, Namespace, reqparse
 
 from models.task import Task
 from validation.task import TaskSchema
+
+from validation.helpers import validate_model_input
+
+from validation.helpers import validate_if_model_exists
 
 task_namespace = Namespace('task', description='Task operations')
 
@@ -17,19 +19,13 @@ class TaskList(Resource):
 
     @staticmethod
     def get():
-        tasks = [{"id": t.id,
-                  "title": t.title,
-                  "content": t.content,
-                  "created_at": str(t.created_at)}
-                 for t in Task.select()]
-        return {"tasks": tasks}
+        tasks = list(Task.select(Task.id, Task.title, Task.created_at).dicts())
+        return TaskSchema(many=True).dump(tasks)
 
     @staticmethod
     @task_namespace.expect(task_parser, validate=False)
+    @validate_model_input(schema=TaskSchema)
     def post():
-        errors = TaskSchema().validate(data=request.get_json())
-        if errors:
-            return make_response(errors, "400")
         task = TaskSchema().load(request.get_json())
         model = Task.create(title=task.title,
                             content=task.content)
@@ -37,37 +33,24 @@ class TaskList(Resource):
 
 
 class TaskSingle(Resource):
-    class Decorator:
-        @classmethod
-        def check_if_task_exists(cls, func):
-            """ if task does not exist return resp 404"""
-            def wrapper(task_id, *args, **kwargs):
-                model = Task.get_or_none(id=task_id)
-                if model:
-                    return func(model, *args, **kwargs)
-                else:
-                    return make_response({"message": f'There is no task with id {task_id}'}, "404")
-            return wrapper
 
     @staticmethod
-    @Decorator.check_if_task_exists
-    def get(model):
+    @validate_if_model_exists(key_name="task_id", database_model=Task)
+    def get(model, *args, **kwargs):
         return make_response(TaskSchema().dumps(model), "200")
 
     @staticmethod
     @task_namespace.expect(task_parser, validate=False)
-    @Decorator.check_if_task_exists
-    def put(model):
-        errors = TaskSchema().validate(data=request.get_json())
-        if errors:
-            return make_response(errors, "400")
+    @validate_if_model_exists(key_name="task_id", database_model=Task)
+    @validate_model_input(schema=TaskSchema)
+    def put(model, *args, **kwargs):
         task = TaskSchema().load(request.get_json())
         model.title, model.content = task.title, task.content
         model.save()
         return make_response(TaskSchema().dumps(model), "201")
 
     @staticmethod
-    @Decorator.check_if_task_exists
-    def delete(model):
+    @validate_if_model_exists(key_name="task_id", database_model=Task)
+    def delete(model, *args, **kwargs):
         model.delete_instance()
         return make_response({"message": f"Deleted task with id {model.id}"}, "200")

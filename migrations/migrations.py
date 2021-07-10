@@ -1,7 +1,7 @@
 import settings
 from models.database import db
 from models.task import Task
-
+import peewee_migrate
 REGISTERED_MODELS = [Task]
 
 
