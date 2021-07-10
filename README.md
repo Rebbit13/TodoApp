@@ -79,4 +79,10 @@ with sudo permissions):
 
 The app will run in no screen mode
 
+Testing
+---
+Just run command bellow from evgeny_todo dir
+> python3 -m unittest tests/test_task.py
+
+
 **Rebbit13**

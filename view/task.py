@@ -2,14 +2,14 @@ from flask import make_response, request
 from flask_restx import Resource, Namespace, reqparse
 
 from models.task import Task
+from validation.helpers import validate_if_model_exists, validate_model_input
 from validation.task import TaskSchema
 
-from validation.helpers import validate_model_input
 
-from validation.helpers import validate_if_model_exists
-
+# init task namespaces for swagger docs
 task_namespace = Namespace('task', description='Task operations')
 
+# init parser for swagger docs
 task_parser = reqparse.RequestParser()
 task_parser.add_argument('title', required=True, location='json')
 task_parser.add_argument('content', required=True, location='json')

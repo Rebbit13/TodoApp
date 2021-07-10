@@ -1,4 +1,0 @@
-"""
-Peewee initial migration
-"""
-

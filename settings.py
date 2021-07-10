@@ -4,7 +4,7 @@ The project config
 
 # In production both mast be False
 DEBUG = True
-TESTING = False
+TESTING = True
 
 # Database name to use in the project.
 DATABASE_NAME = 'todo.db'

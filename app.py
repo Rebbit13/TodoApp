@@ -4,7 +4,7 @@ from flask import Flask
 from flask_restx import Api
 
 import settings
-from api.urls import task_namespace
+from urls import task_namespace
 from migrations.migrations import migrate_database
 
 
