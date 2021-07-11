@@ -24,3 +24,5 @@ services:
       - .env
     links:
       - "postgres:database"
+    depends_on:
+      - postgres
