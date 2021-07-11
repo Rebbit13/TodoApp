@@ -24,4 +24,4 @@ api.add_namespace(task_namespace)
 
 if __name__ == '__main__':
     migrate_database()
-    app.run(debug=settings.DEBUG)
+    app.run(debug=settings.DEBUG, host="0.0.0.0")
