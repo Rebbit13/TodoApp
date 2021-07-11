@@ -1,8 +1,9 @@
-from peewee import SqliteDatabase
+from peewee_migrate import Router
+from playhouse.postgres_ext import PostgresqlExtDatabase
 
-import settings
+db = PostgresqlExtDatabase(None)
 
-if settings.TESTING is True:
-    db = SqliteDatabase(":memory:")
-else:
-    db = SqliteDatabase(settings.DATABASE_NAME)
+
+def migrate(migrate_name):
+    router = Router(db)
+    router.run(migrate_name)

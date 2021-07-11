@@ -1,12 +1,11 @@
-import os
 import unittest
 from unittest import TestCase
 
 from app import app
 from models.task import Task
-from database import db
+from peewee import SqliteDatabase
 
-os.environ["DEBUG"] = "TESTING"
+test_db = SqliteDatabase(":memory:")
 
 
 class TaskTestCase(TestCase):
@@ -35,14 +34,17 @@ class TaskTestCase(TestCase):
                     "cuntent": "some content"}
 
     def _set_up(self):
-        self.db_fd = db
         self.app = app.test_client()
-        self.db_fd.create_tables([Task])
+        test_db.bind([Task], bind_refs=False, bind_backrefs=False)
+        test_db.connect()
+        test_db.create_tables([Task])
         self.app.post("/api/task/",
                       json=self.correct_json)
 
-    def _tear_down(self):
-        self.db_fd.close()
+    @staticmethod
+    def _tear_down():
+        test_db.drop_tables([Task])
+        test_db.close()
 
 
 class PostTaskTestCase(TaskTestCase):

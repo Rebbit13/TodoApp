@@ -13,6 +13,10 @@ Include/site/
 
 # ignore db
 *.db
+postgresql/
+
+# ignore env
+.env
 
 # ignore logs
 /*.log
